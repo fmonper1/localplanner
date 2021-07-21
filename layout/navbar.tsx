@@ -4,30 +4,33 @@ import { useEffect } from "react";
 
 export const Navbar = () => {
   const authCtx = useAuthContext();
+  const { state: authState } = authCtx;
   const notificationCtx = useNotificationContext();
 
   useEffect(() => {
-    setInterval(() => {
-      notificationCtx.dispatch({
-        type: "ADD_NOTIFICATION",
-        notification: "test",
-      });
-    }, 3000);
-  }, []);
+    if (authState.state === "LOGGED_IN")
+      setInterval(() => {
+        notificationCtx.dispatch({
+          type: "ADD_NOTIFICATION",
+          notification: "test",
+        });
+      }, 3000);
+  }, [authState]);
 
   return (
-    <header className="w-full flex justify-between">
+    <header className="w-full flex justify-between bg-black-800">
       <div>logo</div>
-      {authCtx.state.state === "LOGGED_IN" && (
+      <div className="flex-grow" />
+      {authState.state === "LOGGED_IN" && (
         <div>
-          {authCtx.state.user?.name}
+          {authState.user?.name}
           <button onClick={() => authCtx.doLogout()}>logout</button>
         </div>
       )}
-      {authCtx.state.state === "LOGGED_IN" && (
+      {authState.state === "LOGGED_IN" && (
         <div>{notificationCtx.state.unreadCount}</div>
       )}
-      {authCtx.state.state === "LOGGED_OUT" && (
+      {authState.state === "LOGGED_OUT" && (
         <div>
           <button onClick={() => authCtx.doLogin()}>login</button>
         </div>
