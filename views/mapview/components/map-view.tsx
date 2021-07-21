@@ -18,6 +18,7 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
           mapdata.features[0].geometry.coordinates[0],
         ] as LatLngTuple)
       }
+      whenCreated={(e) => console.log(e)}
       zoom={10}
       scrollWheelZoom={false}
       style={{ width: "100%", height: 400 }}

@@ -3,8 +3,6 @@ import type { AppProps } from "next/app";
 import { AuthProvider } from "../context/auth/auth-context";
 import { Navbar } from "../layout/navbar";
 import { NotificationProvider } from "../context/notifications/notification-context";
-import "tailwindcss/tailwind.css";
-import styles from "../styles/Home.module.css";
 import Image from "next/image";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -25,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             rel="noopener noreferrer"
           >
             Powered by{" "}
-            <span className={styles.logo}>
+            <span>
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"

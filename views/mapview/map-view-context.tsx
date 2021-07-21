@@ -1,18 +1,24 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { Collection } from "./types/collection";
+import { Collection, Feature } from "./types/collection";
 
 type MapViewState = {
   collection?: Collection;
+  feature?: Feature;
   map?: {
     center?: [number, number];
   };
 };
 
-type MapViewAction = {
-  type: "SET_CENTER";
-  coords: [number, number];
-};
+type MapViewAction =
+  | {
+      type: "SET_CURRENT_FEATURE";
+      feature: Feature;
+    }
+  | {
+      type: "SET_CENTER";
+      coords: [number, number];
+    };
 
 const MapViewContext = React.createContext<
   [MapViewState, React.Dispatch<MapViewAction>] | undefined
@@ -27,6 +33,18 @@ const notificationReducer = (
       return {
         ...state,
         map: { center: action.coords },
+      };
+    }
+    case "SET_CURRENT_FEATURE": {
+      return {
+        ...state,
+        map: {
+          center: [
+            action.feature.geometry.coordinates[1],
+            action.feature.geometry.coordinates[0],
+          ],
+        },
+        feature: action.feature,
       };
     }
     default: {
@@ -57,10 +75,17 @@ function useMapViewContext() {
       coords,
     });
   };
+  const setFeature = (feature: Feature) => {
+    dispatch({
+      type: "SET_CURRENT_FEATURE",
+      feature,
+    });
+  };
   return {
     state,
     dispatch,
     setMapCenter,
+    setFeature,
   };
 }
 

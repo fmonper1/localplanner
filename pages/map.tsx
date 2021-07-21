@@ -5,6 +5,7 @@ import { MapViewProvider } from "../views/mapview/map-view-context";
 import * as data from "../views/mapview/data.json";
 import { Collection } from "../views/mapview/types/collection";
 import { PlacesList } from "../views/mapview/components/places-list";
+import { FeatureView } from "../views/mapview/components/feature-view";
 
 export default function Map() {
   const MapView = React.useMemo(
@@ -24,12 +25,19 @@ export default function Map() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MapViewProvider initialData={data as Collection}>
-        <div className="flex">
-          <div className="w-1/5">
-            <PlacesList data={data as Collection} />
+        <div className="flex max-h-[75vh]">
+          <div className="w-2/6 bg-blue-100 flex flex-col">
+            <div className=" overflow-x-scroll">
+              <PlacesList data={data as Collection} />
+            </div>
+            <div className="bg-blue-400 py-8">
+              <h3>Collection: Tenerife</h3>
+              <h4>Created By: Fer</h4>
+            </div>
           </div>
-          <div className="w-4/5">
+          <div className="w-4/6">
             <MapView mapdata={data as Collection} />
+            <FeatureView />
           </div>
         </div>
       </MapViewProvider>
