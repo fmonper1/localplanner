@@ -10,6 +10,7 @@ export const PlacesList: React.FC<{ data: Collection }> = ({ data }) => {
       {data.features.map((item, i) => (
         <li key={i}>
           <button
+            className="w-full p-4"
             // onClick={() =>
             //     setMapCenter([
             //       item.geometry.coordinates[1],

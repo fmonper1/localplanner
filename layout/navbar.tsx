@@ -1,6 +1,8 @@
 import { useAuthContext } from "../context/auth/auth-context";
 import { useNotificationContext } from "../context/notifications/notification-context";
 import { useEffect } from "react";
+import logout from "../pages/api/logout";
+import Link from "next/link";
 
 export const Navbar = () => {
   const authCtx = useAuthContext();
@@ -18,13 +20,20 @@ export const Navbar = () => {
   }, [authState]);
 
   return (
-    <header className="w-full flex justify-between bg-black text-white p-4">
+    <header className="w-full flex justify-between bg-black text-white p-4 space-x-4">
       <div>localplanner</div>
       <div className="flex-grow" />
       {authState.state === "LOGGED_IN" && (
         <div>
           {authState.user?.name}
-          <button onClick={() => authCtx.doLogout()}>logout</button>
+          <button
+            onClick={() => {
+              logout();
+              // authCtx.doLogout();
+            }}
+          >
+            logout
+          </button>
         </div>
       )}
       {authState.state === "LOGGED_IN" && (
@@ -32,9 +41,21 @@ export const Navbar = () => {
       )}
       {authState.state === "LOGGED_OUT" && (
         <div>
-          <button onClick={() => authCtx.doLogin()}>login</button>
+          <Link href="/auth">
+            <a>
+              <button type="button">Sign in</button>
+            </a>
+          </Link>
+          {/*<button onClick={() => authCtx.doLogin()}>login</button>*/}
         </div>
       )}
+      <div>
+        <Link href="/map">
+          <a>
+            <button type="button">map</button>
+          </a>
+        </Link>
+      </div>
     </header>
   );
 };

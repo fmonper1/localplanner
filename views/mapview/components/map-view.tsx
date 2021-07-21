@@ -21,7 +21,7 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
       whenCreated={(e) => console.log(e)}
       zoom={10}
       scrollWheelZoom={false}
-      style={{ width: "100%", height: 400 }}
+      style={{ width: "100%", height: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -49,7 +49,7 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
   );
 
   return (
-    <div className="w-full h-[400px]">
+    <div className="w-full h-[80%]">
       <MapElem />
     </div>
   );

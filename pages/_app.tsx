@@ -4,6 +4,9 @@ import { AuthProvider } from "../context/auth/auth-context";
 import { Navbar } from "../layout/navbar";
 import { NotificationProvider } from "../context/notifications/notification-context";
 import Image from "next/image";
+import initAuth from "../utils/initAuth";
+
+initAuth();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
