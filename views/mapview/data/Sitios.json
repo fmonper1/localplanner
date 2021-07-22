@@ -1,0 +1,249 @@
+{
+  "type": "FeatureCollection",
+  "name": "Sitios",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "Name": "Playa de Benijo", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.1925214, 28.5721077] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Playa Roque de las Bodegas",
+        "description": null
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.2050732, 28.5690488] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Acantilados de los Gigantes",
+        "description": null
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.8377834, 28.2408828] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "El Semáforo", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.1455799, 28.5234044] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "sendero de los guardianes",
+        "description": null
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.6291304, 28.2915637] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Monte de las Mercedes", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.3241667, 28.5383333] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Piscinas Naturales De Garachico El Caletón",
+        "description": null
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.7662672, 28.3732955] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Tamaimo", "description": "carretera chuli" },
+      "geometry": { "type": "Point", "coordinates": [-16.8200501, 28.2683374] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Auditorio de Tenerife Adán Martín",
+        "description": null
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.251352, 28.4561009] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Drago Milenario", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.7222153, 28.3665825] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "La Orotava",
+        "description": "buscar la casa de los balcones y casa de los marqueses de sauzal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-16.5238744000001, 28.3913534]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Liceo de Taoro", "description": null },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-16.522651499999899, 28.3900906]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Faro Punta del Hidalgo", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.3287655, 28.5763901] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Roque Cinchado",
+        "description": "para ver las estrellas"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.631667, 28.224722] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Barranco de la Laja", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.4551212, 28.3622298] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Elevador de la Gordejuela",
+        "description": null
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.5619699, 28.3755018] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Parque Natural de Anaga",
+        "description": "hacer una ruta andando por esta zona"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-16.2289940000001, 28.5415143]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Las Cañadas del Teide",
+        "description": "mirador desfase"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.5661413, 28.2962064] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Promociones Cherfe sl",
+        "description": "buscar el mirador de cherfe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-16.819072499999901, 28.2695448]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Pico Viejo", "description": "teleferico" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-16.672777799999899, 28.2622222]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "El Mirador Archipenque", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.8370118, 28.2404149] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Mirador de La Corona", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.6004263, 28.3784634] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Plaza Weyler", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.2554298, 28.4675177] }
+    },
+    {
+      "type": "Feature",
+      " properties": { "Name": "Centro de Congresos", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.5486211, 28.4116909] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Barranco de Taborno", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.2719968, 28.5591972] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Carr. Tf. 131, 12",
+        "description": "caminoviejo al pico del ingles"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.52032, 28.40481] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Tenerife Norte Airport", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.3434204, 28.484511] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Calle Marqués, 24",
+        "description": "hostel tenerife"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.5239388, 28.3856272] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Mamio Verde excursiones y rutas a caballo",
+        "description": "albergue mamio verde"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.5033121, 28.4034445] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Name": "Lagarto Backpackers", "description": "hostal" },
+      "geometry": { "type": "Point", "coordinates": [-16.3864541, 28.5343512] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Charco De La Laja",
+        "description": "Bañito muy guapo"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.6518831, 28.396044] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Rojas",
+        "description": "Charcos naturales, vistas bonitas, (es jodido bajar con el coche)"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.465888, 28.4591462] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Mirador Aguaide",
+        "description": "muy muy desfase en un acantilado"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.2947762, 28.5648462] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Terrazas del Sauzal",
+        "description": "bonita puesta de sol"
+      },
+      "geometry": { "type": "Point", "coordinates": [-16.437831, 28.477718] }
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Collection, Feature } from "./types/collection";
 
 type MapViewState = {
-  collection?: Collection;
+  collection?: Collection | Collection[];
   feature?: Feature;
   map?: {
     center?: [number, number];
@@ -53,10 +53,12 @@ const notificationReducer = (
   }
 };
 
-const MapViewProvider: React.FC<{ initialData?: Collection }> = (props) => {
+const MapViewProvider: React.FC<{ initialData?: Collection | Collection[] }> = (
+  props
+) => {
   const [state, dispatch] = React.useReducer<any>(
     notificationReducer,
-    props.initialData ?? {}
+    { collection: props.initialData } ?? {}
   );
   const value = React.useMemo(() => [state, dispatch], [state]);
 

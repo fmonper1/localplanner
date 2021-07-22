@@ -22,7 +22,7 @@ const firebaseAuthConfig = {
     },
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],
-  signInSuccessUrl: "/",
+  signInSuccessUrl: "/demo",
   credentialHelper: "none",
   callbacks: {
     // https://github.com/firebase/firebaseui-web#signinsuccesswithauthresultauthresult-redirecturl

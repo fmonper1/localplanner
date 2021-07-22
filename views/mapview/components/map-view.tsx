@@ -2,13 +2,16 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { Collection } from "../types/collection";
-import { Icon, LatLngTuple } from "leaflet";
+import { LatLngTuple } from "leaflet";
 import * as icons from "../icons/icons";
 import { useMapViewContext } from "../map-view-context";
+import Icon from "@mdi/react";
+import { mdiInformation } from "@mdi/js";
 import { useMemo } from "react";
-const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
-  const { state } = useMapViewContext();
 
+const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata, ...props }) => {
+  const { state, setFeature } = useMapViewContext();
+  const { map } = state;
   const MapElem = () => (
     <MapContainer
       center={
@@ -19,7 +22,7 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
         ] as LatLngTuple)
       }
       whenCreated={(e) => console.log(e)}
-      zoom={10}
+      zoom={13}
       scrollWheelZoom={false}
       style={{ width: "100%", height: "100%" }}
     >
@@ -36,11 +39,17 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
                 feature.geometry.coordinates[0],
               ] as LatLngTuple
             }
-            icon={icons.iconPerson as unknown as Icon}
+            icon={icons.iconPerson}
             key={i}
           >
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              <h2>{feature.properties.Name}</h2>
+              <h3>{feature.properties.description}</h3>
+              <br />
+              <button onClick={() => setFeature(feature)}>
+                <Icon path={mdiInformation} size={0.8} />
+                view details
+              </button>
             </Popup>
           </Marker>
         );
@@ -49,7 +58,7 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata }) => {
   );
 
   return (
-    <div className="w-full h-[80%]">
+    <div className="h-[60vh]">
       <MapElem />
     </div>
   );

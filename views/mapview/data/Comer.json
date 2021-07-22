@@ -1,0 +1,15 @@
+{
+  "type": "FeatureCollection",
+  "name": "Comer",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "Name": "Guachinche El Cubano", "description": null },
+      "geometry": { "type": "Point", "coordinates": [-16.5041505, 28.3963924] }
+    }
+  ]
+}
