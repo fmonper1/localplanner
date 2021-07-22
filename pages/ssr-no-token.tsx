@@ -17,11 +17,11 @@ const styles = {
   },
 };
 
-const Demo = ({ favoriteColor }) => {
+const Demo: React.FC<any> = ({ favoriteColor }) => {
   const AuthUser = useAuthUser();
   return (
     <div>
-      <Header email={AuthUser.email} signOut={AuthUser.signOut} />
+      <Header email={AuthUser.email ?? undefined} signOut={AuthUser.signOut} />
       <div style={styles.content}>
         <div style={styles.infoTextContainer}>
           <h3>Example: SSR + no ID token</h3>
@@ -47,6 +47,8 @@ export const getServerSideProps = withAuthUserSSR({
   // include one. If you need a server-side token, use
   // `withAuthUserTokenSSR`.
   const token = await AuthUser.getIdToken();
+  // @ts-ignore
+
   const endpoint = getAbsoluteURL("/api/example", req);
   const response = await fetch(endpoint, {
     method: "GET",

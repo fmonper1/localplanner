@@ -1,12 +1,22 @@
 import React from "react";
-import { Collection } from "../types/collection";
+import { Collection, Feature } from "../types/collection";
 import { useMapViewContext } from "../map-view-context";
+import { useRenderCounter } from "../../../hooks/useRenderCounter";
 
 export const PlacesList: React.FC<{ data?: Collection }> = ({ data }) => {
   const { state, setFeature } = useMapViewContext();
+  const renderCount = useRenderCounter();
 
+  const FeatureEntry = ({ item }: { item: Feature }) => (
+    <li>
+      <button className="w-full p-4" onClick={() => setFeature(item)}>
+        {item?.properties?.Name}
+      </button>
+    </li>
+  );
   return (
     <ul className="block max-h-1/2  overflow-x-scroll">
+      {renderCount}
       {typeof state.collection !== undefined ? (
         Array.isArray(state.collection) ? (
           state.collection.map((collection) => {
@@ -14,25 +24,14 @@ export const PlacesList: React.FC<{ data?: Collection }> = ({ data }) => {
               <div>
                 <div>{collection.name}</div>
                 {collection.features.map((item, i) => (
-                  <li key={i}>
-                    <button
-                      className="w-full p-4"
-                      onClick={() => setFeature(item)}
-                    >
-                      {item?.properties?.Name}
-                    </button>
-                  </li>
+                  <FeatureEntry item={item} key={i} />
                 ))}
               </div>
             );
           })
         ) : (
           state?.collection?.features.map((item, i) => (
-            <li key={i}>
-              <button className="w-full p-4" onClick={() => setFeature(item)}>
-                {item?.properties?.Name}
-              </button>
-            </li>
+            <FeatureEntry item={item} key={i} />
           ))
         )
       ) : (

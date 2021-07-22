@@ -3,7 +3,7 @@ import initAuth from "../../utils/initAuth";
 
 initAuth();
 
-const handler = async (req, res) => {
+const handler = async (req: any, res: any) => {
   if (!(req.headers && req.headers.authorization)) {
     return res
       .status(400)

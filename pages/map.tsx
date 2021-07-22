@@ -10,6 +10,8 @@ import { Collection } from "../views/mapview/types/collection";
 import { PlacesList } from "../views/mapview/components/places-list";
 import { FeatureView } from "../views/mapview/components/feature-view";
 import { useEffect, useRef, useState } from "react";
+import { useRenderCounter } from "../hooks/useRenderCounter";
+import { MapPage } from "../views/mapview/map-page";
 
 export default function Map() {
   const MapView = React.useMemo(
@@ -28,6 +30,7 @@ export default function Map() {
     Sitios as Collection,
     data as Collection,
   ];
+
   return (
     <div>
       <Head>
@@ -36,23 +39,7 @@ export default function Map() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MapViewProvider initialData={dataArr}>
-        <div className="flex max-h-[85vh]">
-          <div className="w-2/6 bg-blue-100 flex flex-col">
-            <div className=" overflow-y-scroll">
-              <PlacesList />
-            </div>
-            <div className="bg-blue-400 py-8">
-              <h3>Collection: Tenerife</h3>
-              <h4>Created By: Fer</h4>
-            </div>
-          </div>
-          <div className="w-4/6 overflow-y-scroll relative">
-            <div className="z-10">
-              <MapView mapdata={data as Collection} />
-            </div>
-            <FeatureView />
-          </div>
-        </div>
+        <MapPage mapView={<MapView />} />
       </MapViewProvider>
     </div>
   );

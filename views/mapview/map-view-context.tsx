@@ -48,21 +48,26 @@ const notificationReducer = (
       };
     }
     default: {
-      throw new Error(`Unsupported action type: ${action.type}`);
+      throw new Error(`Unsupported action type`);
     }
   }
 };
 
-const MapViewProvider: React.FC<{ initialData?: Collection | Collection[] }> = (
-  props
-) => {
-  const [state, dispatch] = React.useReducer<any>(
+const MapViewProvider: React.FC<{
+  initialData?: Collection | Collection[];
+}> = (props) => {
+  const [state, dispatch] = React.useReducer(
     notificationReducer,
     { collection: props.initialData } ?? {}
   );
   const value = React.useMemo(() => [state, dispatch], [state]);
 
-  return <MapViewContext.Provider value={value} {...props} />;
+  return (
+    <MapViewContext.Provider
+      value={value as [MapViewState, React.Dispatch<MapViewAction>]}
+      {...props}
+    />
+  );
 };
 
 function useMapViewContext() {

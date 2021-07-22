@@ -14,7 +14,13 @@ const styles = {
   },
 };
 
-const Header = ({ email, signOut }) => (
+const Header = ({
+  email,
+  signOut,
+}: {
+  email?: string | null;
+  signOut: (...args: any[]) => void;
+}) => (
   <div style={styles.container}>
     {email ? (
       <>

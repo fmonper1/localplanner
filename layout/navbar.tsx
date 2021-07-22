@@ -31,8 +31,8 @@ export const Navbar = () => {
           {authState.user?.name}
           <button
             onClick={() => {
-              logout();
-              // authCtx.doLogout();
+              AuthUser.signOut();
+              authCtx.doLogout();
             }}
           >
             logout

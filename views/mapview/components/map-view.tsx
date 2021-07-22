@@ -8,17 +8,18 @@ import { useMapViewContext } from "../map-view-context";
 import Icon from "@mdi/react";
 import { mdiInformation } from "@mdi/js";
 import { useMemo } from "react";
+import { useRenderCounter } from "../../../hooks/useRenderCounter";
 
-const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata, ...props }) => {
+const MapView: React.FC = ({ ...props }) => {
   const { state, setFeature } = useMapViewContext();
-  const { map } = state;
+
   const MapElem = () => (
     <MapContainer
       center={
         state.map?.center ??
         ([
-          mapdata.features[0].geometry.coordinates[1],
-          mapdata.features[0].geometry.coordinates[0],
+          state.collection[0].features[0].geometry.coordinates[1],
+          state.collection[0].features[0].geometry.coordinates[0],
         ] as LatLngTuple)
       }
       whenCreated={(e) => console.log(e)}
@@ -30,30 +31,58 @@ const MapView: React.FC<{ mapdata: Collection }> = ({ mapdata, ...props }) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {mapdata.features.map((feature, i) => {
-        return (
-          <Marker
-            position={
-              [
-                feature.geometry.coordinates[1],
-                feature.geometry.coordinates[0],
-              ] as LatLngTuple
-            }
-            icon={icons.iconPerson}
-            key={i}
-          >
-            <Popup>
-              <h2>{feature.properties.Name}</h2>
-              <h3>{feature.properties.description}</h3>
-              <br />
-              <button onClick={() => setFeature(feature)}>
-                <Icon path={mdiInformation} size={0.8} />
-                view details
-              </button>
-            </Popup>
-          </Marker>
-        );
-      })}
+      {state.collection &&
+        Array.isArray(state.collection) &&
+        state.collection.map((collection) =>
+          collection.features.map((feature, i) => (
+            <Marker
+              position={
+                [
+                  feature.geometry.coordinates[1],
+                  feature.geometry.coordinates[0],
+                ] as LatLngTuple
+              }
+              icon={icons.iconPerson}
+              key={i}
+            >
+              <Popup>
+                <h2>{feature.properties?.Name}</h2>
+                <h3>{feature.properties?.description}</h3>
+                <br />
+                <button onClick={() => setFeature(feature)}>
+                  <Icon path={mdiInformation} size={0.8} />
+                  view details
+                </button>
+              </Popup>
+            </Marker>
+          ))
+        )}
+      {state.collection &&
+        !Array.isArray(state.collection) &&
+        state.collection.features.map((feature, i) => {
+          return (
+            <Marker
+              position={
+                [
+                  feature.geometry.coordinates[1],
+                  feature.geometry.coordinates[0],
+                ] as LatLngTuple
+              }
+              icon={icons.iconPerson}
+              key={i}
+            >
+              <Popup>
+                <h2>{feature.properties.Name}</h2>
+                <h3>{feature.properties.description}</h3>
+                <br />
+                <button onClick={() => setFeature(feature)}>
+                  <Icon path={mdiInformation} size={0.8} />
+                  view details
+                </button>
+              </Popup>
+            </Marker>
+          );
+        })}
     </MapContainer>
   );
 

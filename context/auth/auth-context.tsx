@@ -24,7 +24,7 @@ const authReducer = (state: AuthState, action: ReducerAction): AuthState => {
       return { state: "LOGGED_OUT" };
     }
     default: {
-      throw new Error(`Unsupported action type: ${action.type}`);
+      throw new Error(`Unsupported action type`);
     }
   }
 };
@@ -34,7 +34,12 @@ const AuthProvider: React.FC = (props) => {
     state: "LOGGED_OUT",
   });
   const value = React.useMemo(() => [state, dispatch], [state]);
-  return <AuthContext.Provider value={value} {...props} />;
+  return (
+    <AuthContext.Provider
+      value={value as [AuthState, React.Dispatch<ReducerAction>]}
+      {...props}
+    />
+  );
 };
 
 function useAuthContext() {

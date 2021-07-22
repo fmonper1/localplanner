@@ -34,13 +34,18 @@ const notificationReducer = (
 };
 
 const NotificationProvider: React.FC = (props) => {
-  const [state, dispatch] = React.useReducer<any>(notificationReducer, {
+  const [state, dispatch] = React.useReducer(notificationReducer, {
     unreadCount: 0,
     notifications: [],
   });
   const value = React.useMemo(() => [state, dispatch], [state]);
 
-  return <NotificationContext.Provider value={value} {...props} />;
+  return (
+    <NotificationContext.Provider
+      value={value as [NotificationState, React.Dispatch<ReducerAction>]}
+      {...props}
+    />
+  );
 };
 
 function useNotificationContext() {
