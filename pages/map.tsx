@@ -1,23 +1,18 @@
+import * as React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import * as React from "react";
 import { MapViewProvider } from "../views/mapview/map-view-context";
 import * as data from "../views/mapview/data/data.json";
 import * as Comer from "../views/mapview/data/Comer.json";
 import * as Playas from "../views/mapview/data/Playas.json";
 import * as Sitios from "../views/mapview/data/Sitios.json";
 import { Collection } from "../views/mapview/types/collection";
-import { PlacesList } from "../views/mapview/components/places-list";
-import { FeatureView } from "../views/mapview/components/feature-view";
-import { useEffect, useRef, useState } from "react";
-import { useRenderCounter } from "../hooks/useRenderCounter";
 import { MapPage } from "../views/mapview/map-page";
 
 export default function Map() {
   const MapView = React.useMemo(
     () =>
       dynamic(
-        // @ts-ignore
         () => import("../views/mapview/components/map-view"), // replace '@components/map' with your component's location
         { loading: () => <p>A map is loading</p>, ssr: false } // This line is important. It's what prevents server-side render
       ),
@@ -40,6 +35,7 @@ export default function Map() {
       </Head>
       <MapViewProvider initialData={dataArr}>
         <MapPage mapView={<MapView />} />
+        {/*<MapPage mapView={MapView} />*/}
       </MapViewProvider>
     </div>
   );

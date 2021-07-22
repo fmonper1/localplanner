@@ -1,9 +1,9 @@
 /* globals window */
 
-const getAbsoluteURL = (url: string, req = null) => {
+const getAbsoluteURL = (url: string, req?: any) => {
   let host;
   if (req) {
-    host = req.headers.host;
+    host = req?.headers?.host;
   } else {
     if (typeof window === "undefined") {
       throw new Error(

@@ -16,11 +16,16 @@ const MapView: React.FC = ({ ...props }) => {
   const MapElem = () => (
     <MapContainer
       center={
-        state.map?.center ??
-        ([
-          state.collection[0].features[0].geometry.coordinates[1],
-          state.collection[0].features[0].geometry.coordinates[0],
-        ] as LatLngTuple)
+        state.collection &&
+        (Array.isArray(state.collection)
+          ? ([
+              state.collection[0].features[0].geometry.coordinates[1],
+              state.collection[0].features[0].geometry.coordinates[0],
+            ] as LatLngTuple)
+          : ([
+              state.collection.features[0].geometry.coordinates[1],
+              state.collection.features[0].geometry.coordinates[0],
+            ] as LatLngTuple))
       }
       whenCreated={(e) => console.log(e)}
       zoom={13}
