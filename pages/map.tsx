@@ -10,15 +10,6 @@ import { Collection } from "../views/mapview/types/collection";
 import { MapPage } from "../views/mapview/map-page";
 
 export default function Map() {
-  const MapView = React.useMemo(
-    () =>
-      dynamic(
-        () => import("../views/mapview/components/map-view"), // replace '@components/map' with your component's location
-        { loading: () => <p>A map is loading</p>, ssr: false } // This line is important. It's what prevents server-side render
-      ),
-    []
-  );
-
   const dataArr = [
     Playas as Collection,
     Comer as Collection,
@@ -34,7 +25,7 @@ export default function Map() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MapViewProvider initialData={dataArr}>
-        <MapPage mapView={<MapView />} />
+        <MapPage mapView={<></>} />
         {/*<MapPage mapView={MapView} />*/}
       </MapViewProvider>
     </div>

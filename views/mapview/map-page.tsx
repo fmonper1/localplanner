@@ -3,10 +3,21 @@ import * as data from "./data/data.json";
 import { Collection } from "./types/collection";
 import { FeatureView } from "./components/feature-view";
 import * as React from "react";
+import dynamic from "next/dynamic";
+import { useMapViewContext } from "./map-view-context";
 
 export const MapPage: React.FC<{ mapView: React.ReactNode }> = ({
   mapView,
 }) => {
+  const { state } = useMapViewContext();
+  const MapView = React.useMemo(
+    () =>
+      dynamic(
+        () => import("./components/map-view"), // replace '@components/map' with your component's location
+        { loading: () => <p>A map is loading</p>, ssr: false } // This line is important. It's what prevents server-side render
+      ),
+    []
+  );
   return (
     <div className="flex max-h-[85vh]">
       <div className="w-2/6 bg-blue-100 flex flex-col">
@@ -19,7 +30,9 @@ export const MapPage: React.FC<{ mapView: React.ReactNode }> = ({
         </div>
       </div>
       <div className="w-4/6 overflow-y-scroll relative">
-        <div className="z-10">{mapView}</div>
+        <div className="z-10">
+          <MapView />
+        </div>
         <FeatureView />
       </div>
     </div>

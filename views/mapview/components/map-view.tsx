@@ -1,23 +1,25 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-import { Collection } from "../types/collection";
 import { LatLngTuple } from "leaflet";
 import * as icons from "../icons/icons";
 import { useMapViewContext } from "../map-view-context";
 import Icon from "@mdi/react";
 import { mdiInformation } from "@mdi/js";
-import { useMemo } from "react";
 import { useRenderCounter } from "../../../hooks/useRenderCounter";
 
 const MapView: React.FC = ({ ...props }) => {
   const { state, setFeature } = useMapViewContext();
-
   const MapElem = () => (
     <MapContainer
       center={
         state.collection &&
-        (Array.isArray(state.collection)
+        (state.feature
+          ? ([
+              state.feature.geometry.coordinates[1],
+              state.feature.geometry.coordinates[0],
+            ] as LatLngTuple)
+          : Array.isArray(state.collection)
           ? ([
               state.collection[0].features[0].geometry.coordinates[1],
               state.collection[0].features[0].geometry.coordinates[0],
