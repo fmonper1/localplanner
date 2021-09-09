@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { LatLngTuple } from "leaflet";
@@ -10,7 +10,50 @@ import { useRenderCounter } from "../../../hooks/useRenderCounter";
 
 const MapView: React.FC = ({ ...props }) => {
   const { state, setFeature } = useMapViewContext();
-  const MapElem = () => (
+
+  const RenderMarkers = ({ feature }) => (
+    <Marker
+      position={
+        [
+          feature.geometry.coordinates[1],
+          feature.geometry.coordinates[0],
+        ] as LatLngTuple
+      }
+      icon={
+        JSON.stringify(state.feature?.geometry.coordinates) ===
+        JSON.stringify(feature.geometry.coordinates)
+          ? icons.activeIcon
+          : icons.iconPerson
+      }
+    >
+      <Popup>
+        <h2>{feature.properties?.Name}</h2>
+        <h3>{feature.properties?.description}</h3>
+        <br />
+        <button
+          onClick={() => setFeature(feature)}
+          className="bg-blue-500 px-2 py-1 rounded-md inline-flex items-center justify-center gap-2"
+        >
+          <Icon path={mdiInformation} size={0.8} />
+          view details
+        </button>
+      </Popup>
+
+      <Tooltip
+        direction="bottom"
+        offset={[0, 20]}
+        opacity={1}
+        permanent={
+          JSON.stringify(state.feature?.geometry.coordinates) ===
+          JSON.stringify(feature.geometry.coordinates)
+        }
+      >
+        {feature.properties?.Name}
+      </Tooltip>
+    </Marker>
+  );
+
+  return (
     <MapContainer
       center={
         state.collection &&
@@ -42,61 +85,19 @@ const MapView: React.FC = ({ ...props }) => {
         Array.isArray(state.collection) &&
         state.collection.map((collection) =>
           collection.features.map((feature, i) => (
-            <Marker
-              position={
-                [
-                  feature.geometry.coordinates[1],
-                  feature.geometry.coordinates[0],
-                ] as LatLngTuple
-              }
-              icon={icons.iconPerson}
-              key={i}
-            >
-              <Popup>
-                <h2>{feature.properties?.Name}</h2>
-                <h3>{feature.properties?.description}</h3>
-                <br />
-                <button onClick={() => setFeature(feature)}>
-                  <Icon path={mdiInformation} size={0.8} />
-                  view details
-                </button>
-              </Popup>
-            </Marker>
+            <RenderMarkers feature={feature} key={i} />
           ))
         )}
       {state.collection &&
         !Array.isArray(state.collection) &&
-        state.collection.features.map((feature, i) => {
-          return (
-            <Marker
-              position={
-                [
-                  feature.geometry.coordinates[1],
-                  feature.geometry.coordinates[0],
-                ] as LatLngTuple
-              }
-              icon={icons.iconPerson}
-              key={i}
-            >
-              <Popup>
-                <h2>{feature.properties.Name}</h2>
-                <h3>{feature.properties.description}</h3>
-                <br />
-                <button onClick={() => setFeature(feature)}>
-                  <Icon path={mdiInformation} size={0.8} />
-                  view details
-                </button>
-              </Popup>
-            </Marker>
-          );
-        })}
+        state.collection.features.map((feature, i) => (
+          <RenderMarkers feature={feature} key={i} />
+        ))}
+      <div
+        className="bg-gradient-to-b from-transparent to-white h-24 transform absolute bottom-0 w-full"
+        style={{ zIndex: 9999 }}
+      />
     </MapContainer>
-  );
-
-  return (
-    <div className="h-[60vh]">
-      <MapElem />
-    </div>
   );
 };
 

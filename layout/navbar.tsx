@@ -24,7 +24,11 @@ export const Navbar = () => {
 
   return (
     <header className="w-full flex justify-between bg-black text-white p-4 space-x-4">
-      <div>localplanner</div>
+      <div>
+        <Link href="/">
+          <a>localplanner</a>
+        </Link>
+      </div>
       <div className="flex-grow" />
       {authState.state === "LOGGED_IN" && (
         <div>
