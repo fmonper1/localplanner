@@ -26,8 +26,8 @@ const RecenterHandler = () => {
 
     if (state.feature) {
       map.panTo([
-        state.feature.geometry.coordinates[1],
-        state.feature.geometry.coordinates[0],
+        state.feature.coordinate.lat,
+        state.feature.coordinate.lng,
       ] as LatLngTuple);
     }
   }, [state.feature]);
@@ -38,47 +38,35 @@ const RecenterHandler = () => {
 const MapView: React.FC = ({ ...props }) => {
   const { state, setFeature } = useMapViewContext();
 
-  const [center, setCenter] = useState<LatLngTuple>(
-    Array.isArray(state.collection)
-      ? ([
-          state.collection[0].features[0].geometry.coordinates[1],
-          state.collection[0].features[0].geometry.coordinates[0],
-        ] as LatLngTuple)
-      : ([
-          state.collection?.features[0].geometry.coordinates[1],
-          state.collection?.features[0].geometry.coordinates[0],
-        ] as LatLngTuple)
-  );
+  const [center, setCenter] = useState<LatLngTuple>([
+    state.collection.places[0].coordinate.lat,
+    state.collection.places[0].coordinate.lng,
+  ] as LatLngTuple);
 
   useEffect(() => {
     console.log("feature change");
 
     if (state.feature) {
       setCenter([
-        state.feature.geometry.coordinates[1],
-        state.feature.geometry.coordinates[0],
+        state.feature.coordinate.lat,
+        state.feature.coordinate.lng,
       ] as LatLngTuple);
     }
   }, [state.feature]);
 
   const RenderMarkers = ({ feature }: any) => (
     <Marker
-      position={
-        [
-          feature.geometry.coordinates[1],
-          feature.geometry.coordinates[0],
-        ] as LatLngTuple
-      }
+      position={[feature.coordinate.lat, feature.coordinate.lng] as LatLngTuple}
       icon={
-        JSON.stringify(state.feature?.geometry.coordinates) ===
-        JSON.stringify(feature.geometry.coordinates)
+        JSON.stringify(state.feature?.coordinate) ===
+        JSON.stringify(feature.coordinate)
           ? icons.activeIcon
           : icons.iconPerson
       }
     >
       <Popup>
-        <h2>{feature.properties?.Name}</h2>
-        <h3>{feature.properties?.description}</h3>
+        <h2>{feature.name}</h2>
+        <h3>{feature?.description}</h3>
         <br />
         <button
           onClick={() => setFeature(feature)}
@@ -94,8 +82,8 @@ const MapView: React.FC = ({ ...props }) => {
         offset={[0, 20]}
         opacity={1}
         permanent={
-          JSON.stringify(state.feature?.geometry.coordinates) ===
-          JSON.stringify(feature.geometry.coordinates)
+          JSON.stringify(state.feature?.coordinate) ===
+          JSON.stringify(feature.coordinate)
         }
       >
         {feature.properties?.Name}
@@ -117,15 +105,7 @@ const MapView: React.FC = ({ ...props }) => {
       />
       <RecenterHandler />
       {state.collection &&
-        Array.isArray(state.collection) &&
-        state.collection.map((collection) =>
-          collection.features.map((feature, i) => (
-            <RenderMarkers feature={feature} key={i} />
-          ))
-        )}
-      {state.collection &&
-        !Array.isArray(state.collection) &&
-        state.collection.features.map((feature, i) => (
+        state.collection.places.map((feature, i) => (
           <RenderMarkers feature={feature} key={i} />
         ))}
       <div

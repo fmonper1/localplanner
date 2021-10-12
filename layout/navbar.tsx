@@ -2,14 +2,11 @@ import { useAuthContext } from "../context/auth/auth-context";
 import { useNotificationContext } from "../context/notifications/notification-context";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { useAuthUser } from "next-firebase-auth";
 
 export const Navbar = () => {
   const authCtx = useAuthContext();
   const { state: authState } = authCtx;
   const notificationCtx = useNotificationContext();
-
-  const AuthUser = useAuthUser();
 
   useEffect(() => {
     if (authState.state === "LOGGED_IN")
@@ -34,7 +31,6 @@ export const Navbar = () => {
           {authState.user?.name}
           <button
             onClick={() => {
-              AuthUser.signOut();
               authCtx.doLogout();
             }}
           >
@@ -42,28 +38,7 @@ export const Navbar = () => {
           </button>
         </div>
       )}
-      {AuthUser.email ? (
-        <>
-          <p>Signed in as {AuthUser.email}</p>
-          <button
-            type="button"
-            onClick={() => {
-              AuthUser.signOut();
-            }}
-          >
-            Sign out
-          </button>
-        </>
-      ) : (
-        <>
-          <p>You are not signed in.</p>
-          <Link href="/auth">
-            <a>
-              <button type="button">Sign in</button>
-            </a>
-          </Link>
-        </>
-      )}
+
       {authState.state === "LOGGED_IN" && (
         <div>{notificationCtx.state.unreadCount}</div>
       )}

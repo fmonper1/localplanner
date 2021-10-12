@@ -19,7 +19,7 @@ export const MapPage: React.FC<{ mapView: React.ReactNode }> = ({
     []
   );
   return (
-    <div className="flex max-h-[85vh]">
+    <div className="flex max-h-[90vh] min-h-[90vh]">
       <div className="w-2/6 md:w-1/5 bg-blue-100 flex flex-col">
         <div className=" overflow-y-scroll">
           <PlacesList />
@@ -29,7 +29,7 @@ export const MapPage: React.FC<{ mapView: React.ReactNode }> = ({
           <h4>Created By: Fer</h4>
         </div>
       </div>
-      <div className="w-4/6 md:w-4/5 overflow-y-scroll relative">
+      <div className="w-4/6 md:w-4/5 overflow-y-scroll relative max-h-screen">
         <div className="h-[80%]">
           <MapView />
         </div>

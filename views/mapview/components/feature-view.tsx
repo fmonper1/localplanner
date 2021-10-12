@@ -67,7 +67,7 @@ export const FeatureView: React.FC = () => {
         style={{ zIndex: 99999 }}
       >
         <div className="flex justify-between items-center p-2 col-span-2">
-          <h2>{state.feature?.properties.Name}</h2>
+          <h2>{state.feature?.name}</h2>
           <div className="flex space-x-4">
             <div className="text-xs text-center">
               5<br />
@@ -84,7 +84,7 @@ export const FeatureView: React.FC = () => {
           </div>
         </div>
         <div className="col-span-2">
-          <div>{state.feature?.properties.description}</div>
+          <div>{state.feature?.description}</div>
         </div>
 
         <div className="col-span-2">

@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { Collection, Feature } from "./types/collection";
 
 type MapViewState = {
-  collection?: Collection | Collection[];
-  feature?: Feature;
+  collection?: any;
+  feature?: any;
   map?: {
     center?: [number, number];
   };
@@ -13,7 +13,7 @@ type MapViewState = {
 type MapViewAction =
   | {
       type: "SET_CURRENT_FEATURE";
-      feature: Feature;
+      feature: any;
     }
   | {
       type: "SET_CENTER";
@@ -40,8 +40,8 @@ const notificationReducer = (
         ...state,
         map: {
           center: [
-            action.feature.geometry.coordinates[1],
-            action.feature.geometry.coordinates[0],
+            action.feature.coordinate.lat,
+            action.feature.coordinate.lng,
           ],
         },
         feature: action.feature,
@@ -54,7 +54,7 @@ const notificationReducer = (
 };
 
 const MapViewProvider: React.FC<{
-  initialData?: Collection | Collection[];
+  initialData?: any;
 }> = (props) => {
   const [state, dispatch] = React.useReducer(
     notificationReducer,
