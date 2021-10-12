@@ -1,7 +1,6 @@
 import { useAuthContext } from "../context/auth/auth-context";
 import { useNotificationContext } from "../context/notifications/notification-context";
 import React, { useEffect } from "react";
-import logout from "../pages/api/logout";
 import Link from "next/link";
 import { useAuthUser } from "next-firebase-auth";
 

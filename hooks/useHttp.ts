@@ -64,6 +64,8 @@ const useRequest = {
 };
 
 export const useHttp = {
-  get: <T = unknown>(url: string): Promise<AxiosResponse<T, Error>> =>
-    useRequest.get(`${URL_BASE}${url}`),
+  get: <T = unknown, E = Error>(url: string) =>
+    useRequest.get(`${URL_BASE}${url}`) as unknown as Promise<
+      AxiosResponse<T, E>
+    >,
 };

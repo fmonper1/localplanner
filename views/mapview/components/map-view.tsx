@@ -45,8 +45,8 @@ const MapView: React.FC = ({ ...props }) => {
           state.collection[0].features[0].geometry.coordinates[0],
         ] as LatLngTuple)
       : ([
-          state.collection.features[0].geometry.coordinates[1],
-          state.collection.features[0].geometry.coordinates[0],
+          state.collection?.features[0].geometry.coordinates[1],
+          state.collection?.features[0].geometry.coordinates[0],
         ] as LatLngTuple)
   );
 
@@ -61,7 +61,7 @@ const MapView: React.FC = ({ ...props }) => {
     }
   }, [state.feature]);
 
-  const RenderMarkers = ({ feature }) => (
+  const RenderMarkers = ({ feature }: any) => (
     <Marker
       position={
         [
