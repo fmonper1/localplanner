@@ -105,7 +105,7 @@ const MapView: React.FC = ({ ...props }) => {
       />
       <RecenterHandler />
       {state.collection &&
-        state.collection.places.map((feature, i) => (
+        state.collection.places.map((feature: any, i: number) => (
           <RenderMarkers feature={feature} key={i} />
         ))}
       <div

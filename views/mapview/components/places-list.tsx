@@ -23,7 +23,7 @@ export const PlacesList: React.FC<{ data?: Collection }> = ({ data }) => {
     <ul className="block max-h-1/2">
       <div>
         <div className="bg-black text-white p-2">{}</div>
-        {state.collection.places.map((item, i) => (
+        {state.collection.places.map((item: any, i: number) => (
           <FeatureEntry item={item} key={i} />
         ))}
       </div>
