@@ -4,9 +4,6 @@ import { AuthProvider } from "../context/auth/auth-context";
 import { Navbar } from "../layout/navbar";
 import { NotificationProvider } from "../context/notifications/notification-context";
 import Image from "next/image";
-import initAuth from "../utils/initAuth";
-
-initAuth();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,10 +11,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="flex flex-col min-h-screen h-full">
         <NotificationProvider>
           <Navbar />
+          <main className="flex-grow">
+            <Component {...pageProps} />
+          </main>
         </NotificationProvider>
-        <main className="flex-grow">
-          <Component {...pageProps} />
-        </main>
 
         <footer>
           <a

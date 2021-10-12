@@ -30,10 +30,10 @@ export const MapPage: React.FC<{ mapView: React.ReactNode }> = ({
         </div>
       </div>
       <div className="w-4/6 md:w-4/5 overflow-y-scroll relative">
-        <div className="h-[70%]">
+        <div className="h-[80%]">
           <MapView />
         </div>
-        <div className="z-10 max-w-screen-lg mx-auto">
+        <div className="z-10 max-w-screen-lg mx-auto mt-[-150px]">
           <FeatureView />
         </div>
       </div>

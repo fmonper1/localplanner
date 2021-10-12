@@ -52,9 +52,11 @@ function useAuthContext() {
   const doLogin = () => {
     dispatch({ type: "LOG_IN", user: { name: "fer" } });
   };
+
   const doLogout = () => {
     dispatch({ type: "LOG_OUT" });
   };
+
   return {
     state,
     dispatch,

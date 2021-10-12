@@ -1,4 +1,11 @@
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Tooltip,
+  useMap,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { LatLngTuple } from "leaflet";
@@ -7,9 +14,52 @@ import { useMapViewContext } from "../map-view-context";
 import Icon from "@mdi/react";
 import { mdiInformation } from "@mdi/js";
 import { useRenderCounter } from "../../../hooks/useRenderCounter";
+import { useEffect, useState } from "react";
+import { useMapElement } from "react-leaflet/types/MapContainer";
+
+const RecenterHandler = () => {
+  const { state } = useMapViewContext();
+
+  const map = useMap();
+  useEffect(() => {
+    console.log("feature change");
+
+    if (state.feature) {
+      map.panTo([
+        state.feature.geometry.coordinates[1],
+        state.feature.geometry.coordinates[0],
+      ] as LatLngTuple);
+    }
+  }, [state.feature]);
+
+  return <></>;
+};
 
 const MapView: React.FC = ({ ...props }) => {
   const { state, setFeature } = useMapViewContext();
+
+  const [center, setCenter] = useState<LatLngTuple>(
+    Array.isArray(state.collection)
+      ? ([
+          state.collection[0].features[0].geometry.coordinates[1],
+          state.collection[0].features[0].geometry.coordinates[0],
+        ] as LatLngTuple)
+      : ([
+          state.collection.features[0].geometry.coordinates[1],
+          state.collection.features[0].geometry.coordinates[0],
+        ] as LatLngTuple)
+  );
+
+  useEffect(() => {
+    console.log("feature change");
+
+    if (state.feature) {
+      setCenter([
+        state.feature.geometry.coordinates[1],
+        state.feature.geometry.coordinates[0],
+      ] as LatLngTuple);
+    }
+  }, [state.feature]);
 
   const RenderMarkers = ({ feature }) => (
     <Marker
@@ -55,23 +105,7 @@ const MapView: React.FC = ({ ...props }) => {
 
   return (
     <MapContainer
-      center={
-        state.collection &&
-        (state.feature
-          ? ([
-              state.feature.geometry.coordinates[1],
-              state.feature.geometry.coordinates[0],
-            ] as LatLngTuple)
-          : Array.isArray(state.collection)
-          ? ([
-              state.collection[0].features[0].geometry.coordinates[1],
-              state.collection[0].features[0].geometry.coordinates[0],
-            ] as LatLngTuple)
-          : ([
-              state.collection.features[0].geometry.coordinates[1],
-              state.collection.features[0].geometry.coordinates[0],
-            ] as LatLngTuple))
-      }
+      center={center}
       whenCreated={(e) => console.log(e)}
       zoom={13}
       scrollWheelZoom={false}
@@ -81,6 +115,7 @@ const MapView: React.FC = ({ ...props }) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <RecenterHandler />
       {state.collection &&
         Array.isArray(state.collection) &&
         state.collection.map((collection) =>
