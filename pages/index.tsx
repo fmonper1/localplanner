@@ -2,8 +2,24 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useAuthContext } from "../context/auth/auth-context";
+import { useQuery } from "react-query";
+import { useHttp } from "hooks/useHttp";
+
+function fetchGroups() {
+  return useHttp.get<any[]>("places").then((res) => res.data);
+}
+
+function fetchCollections() {
+  return useHttp.get<any[]>("collections").then((res) => res.data);
+}
 
 export default function Home() {
+  const { data } = useQuery<any[], Error>("places", fetchGroups);
+  const collectionsQuery = useQuery<any[], Error>(
+    "collections",
+    fetchCollections
+  );
+
   return (
     <div>
       <Head>
